@@ -14,3 +14,5 @@ Configuration of the JPA DRIVERS
    spring.datasource.password=russelle0
    spring.jpa.hibernate.ddl-auto=update
    spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+2. Create Service layer
