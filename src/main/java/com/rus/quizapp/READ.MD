@@ -15,4 +15,14 @@ Configuration of the JPA DRIVERS
    spring.jpa.hibernate.ddl-auto=update
    spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 
-2. Create Service layer
+2. Organizing layers
+   create  model package for entity layers where we define the column
+   create dao package to fetch data (repositories)
+   create controller package where we handle request from REST
+   create service layer where we handle the logic
+
+3. In model package<br>
+   @Data
+   @Entity
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
