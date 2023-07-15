@@ -16,4 +16,8 @@ public class TestService {
         return testDao.findAll();
     }
 
+    public List<Test> getTestByBio(String bio) {
+        return testDao.findByBio(bio);
+    }
+
 }
