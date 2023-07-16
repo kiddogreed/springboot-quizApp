@@ -26,3 +26,33 @@ Configuration of the JPA DRIVERS
    @Entity
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+*REST ARCHITECTURE*
+
+ 1. fetch all(GET ALL) 200 ok || 404 NotFound
+   - create  fetch method which return list in controller 
+   - use  @GetMapping("allTest")  annotation
+   - extend dao as interface in service using jpa repository 
+   - create method in service layer
+   - in controller call the created method from service
+   - make sure to return proper HTTPResponse (status,message,code,format)
+
+ 2. fetch one(GET BY columns)200 ok  || 404 NotFound
+   - create  get method in controller ex. getbyid
+   - use  @GetMapping("test/{id}")  annotation
+   - add @PathVariable annotation  in parameters
+   - create method in Dao with type of return
+   - use the dao method in service layer
+   - in controller call the created method from service
+   - make sure to return proper HTTPResponse (status,message,code,format)
+
+ 3. Create/add (POST )201 created || 204 No Content
+   - create add method in controller  ex.addData /createUser
+   - use @PostMapping("addData")
+   - use @RequestBody in parameters
+   - in service layer use dao builtin method save
+   - from controller call the created method from service 
+   - make sure to return proper HTTPResponse (status,message,code,format)
+
+ 4. Update/edit (patch/put)200 ok  || 204 No Content || 202 accepted
+ 5. Delete/destroy (delete) 200 ok || 204 No Content || 202 accepted
