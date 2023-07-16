@@ -34,23 +34,26 @@ Configuration of the JPA DRIVERS
    - use  @GetMapping("allTest")  annotation
    - extend dao as interface in service using jpa repository 
    - create method in service layer
+   - create handle exceptions use try catch
    - in controller call the created method from service
    - make sure to return proper HTTPResponse (status,message,code,format)
-
+   - ResponseEntity<>(questionService.getAllQuestions(), HttpStatus.OK)
  2. fetch one(GET BY columns)200 ok  || 404 NotFound
    - create  get method in controller ex. getbyid
    - use  @GetMapping("test/{id}")  annotation
    - add @PathVariable annotation  in parameters
    - create method in Dao with type of return
    - use the dao method in service layer
+   - create handle exceptions use try catch
    - in controller call the created method from service
    - make sure to return proper HTTPResponse (status,message,code,format)
-
+   - ResponseEntity<>(questionService.getAllQuestions(), HttpStatus.OK)
  3. Create/add (POST )201 created || 204 No Content
    - create add method in controller  ex.addData /createUser
    - use @PostMapping("addData")
    - use @RequestBody in parameters
    - in service layer use dao builtin method save
+   - create handle exceptions use try catch
    - from controller call the created method from service 
    - make sure to return proper HTTPResponse (status,message,code,format)
 
