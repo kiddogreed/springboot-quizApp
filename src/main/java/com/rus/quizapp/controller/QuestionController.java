@@ -35,4 +35,10 @@ public class QuestionController {
             return questionService.addQuestion(question);
 
         }
+
+
+        @GetMapping("random/{category}/{numQ}")
+        public ResponseEntity<List<Question>> getRandomQuestionsByCategory(@PathVariable String category, @PathVariable int numQ) {
+            return questionService.getRandomQuestionsByCategory(category, numQ);
+
 }

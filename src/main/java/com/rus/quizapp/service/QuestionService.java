@@ -44,4 +44,13 @@ public class QuestionService {
         return new ResponseEntity<>("failed",HttpStatus.BAD_REQUEST);
        // return "success";
     }
+
+    public ResponseEntity<List<Question>> getRandomQuestionsByCategory(String category, int numQ) {
+        try{
+            return new ResponseEntity<>(questionDao.findRandomQuestionsByCategory(category,numQ),HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(),HttpStatus.BAD_REQUEST);
+    }
 }
