@@ -5,6 +5,7 @@ import com.rus.quizapp.dao.QuizDao;
 import com.rus.quizapp.model.Question;
 import com.rus.quizapp.model.QuestionWrapper;
 import com.rus.quizapp.model.Quiz;
+import com.rus.quizapp.model.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,20 +33,36 @@ public class QuizService {
 
         try {
             return new ResponseEntity<>("Success", HttpStatus.CREATED);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }return new ResponseEntity<>("Failed",HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
 
     }
 
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(Integer id) {
-        Optional<Quiz> quiz =  quizDao.findById(id);
+        Optional<Quiz> quiz = quizDao.findById(id);
         List<Question> questionFromDb = quiz.get().getQuestions();
         List<QuestionWrapper> questionForUser = new ArrayList<>();
-        for (Question question: questionFromDb) {
+        for (Question question : questionFromDb) {
             QuestionWrapper questionWrapper = new QuestionWrapper(question.getId(), question.getQuestionTitle(), question.getOption1(), question.getOption2(), question.getOption3(), question.getOption4());
             questionForUser.add(questionWrapper);
         }
-        return new ResponseEntity<>(questionForUser,HttpStatus.OK);
+        return new ResponseEntity<>(questionForUser, HttpStatus.OK);
+    }
+
+    public ResponseEntity<Integer> caclulateResult(Integer id, List<Response> responses) {
+        Optional<Quiz> quiz = quizDao.findById(id);
+        List<Question> questions = quiz.get().getQuestions();
+        int right = 0;
+        int i = 0;
+        for (Response response : responses) {
+            if (response.getResponse().equals(questions.get(i).getRightAnswer()))
+                right++;
+            i++;
+
+        }
+        return new ResponseEntity<>(right, HttpStatus.OK);
+
     }
 }
