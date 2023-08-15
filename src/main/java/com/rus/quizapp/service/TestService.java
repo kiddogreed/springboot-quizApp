@@ -33,4 +33,15 @@ public class TestService {
         return new ResponseEntity<>(new ArrayList<>(),HttpStatus.BAD_REQUEST);
     }
 
+
+    public Test updateTest(Integer id, Test test) throws Exception {
+        Test existingTest = testDao.findById(id)
+                .orElseThrow(() -> new Exception("Test does not exist with the ID: " + id));
+
+        existingTest.setId(test.getId());
+        existingTest.setBio(test.getBio());
+
+        return testDao.save(existingTest);
+
+    }
 }

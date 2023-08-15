@@ -4,10 +4,7 @@ import com.rus.quizapp.model.Test;
 import com.rus.quizapp.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,16 @@ public class TestController {
   public  ResponseEntity<List<Test>> getTestByBio(@PathVariable String bio) {
     return testService.getTestByBio(bio);
   }
-  
+
+
+  @PutMapping("/{id}")
+  public ResponseEntity<Test> updateTest(@PathVariable Long id, @RequestBody Test test) {
+    Test updatedTest = testService.updateTest(id, test);
+    return ResponseEntity.ok(updatedTest);
+  }
+
 }
+
+
+
+
